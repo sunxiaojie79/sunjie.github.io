@@ -8,17 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>闭包 | 孫小傑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。 作用域通俗点说，作用域为可访问变量，对象，函数的集合，或者说作用域作为一套规则，该规则用于确定在特定场景下如何查找变量。在ES6出现之前，JavaScript只有函数作用域和全局作用域。 函数作用域和全局作用域12345function foo()">
+  <meta name="description" content="闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。 作用域通俗点说，作用域为可访问变量，对象，函数的集合，或者说作用域作为一套规则，该规则用于确定在特定场景下如何查找变量。在ES6出现之前，JavaScript只有函数作用域和全局作用域。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="闭包">
 <meta property="og:url" content="http://yoursite.com/2020/03/24/%E9%97%AD%E5%8C%85/index.html">
 <meta property="og:site_name" content="孫小傑">
-<meta property="og:description" content="闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。 作用域通俗点说，作用域为可访问变量，对象，函数的集合，或者说作用域作为一套规则，该规则用于确定在特定场景下如何查找变量。在ES6出现之前，JavaScript只有函数作用域和全局作用域。 函数作用域和全局作用域12345function foo()">
+<meta property="og:description" content="闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。 作用域通俗点说，作用域为可访问变量，对象，函数的集合，或者说作用域作为一套规则，该规则用于确定在特定场景下如何查找变量。在ES6出现之前，JavaScript只有函数作用域和全局作用域。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de">
 <meta property="article:published_time" content="2020-03-24T10:10:03.507Z">
-<meta property="article:modified_time" content="2020-03-25T03:26:10.541Z">
+<meta property="article:modified_time" content="2020-03-26T06:58:06.633Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de">
   
     <link rel="alternative" href="/atom.xml" title="孫小傑" type="application/atom+xml">
   
@@ -58,8 +60,6 @@
 			<ul>
 			
 				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/archives">归档</a></li>
 	        
 			</ul>
 		</nav>
@@ -117,8 +117,6 @@
 			
 				
 			
-				
-			
 			
 			
 			<nav class="header-nav">
@@ -139,9 +137,7 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
-		        
-					<li style="width: 50%"><a href="/archives">归档</a></li>
+					<li style="width: 100%"><a href="/">主页</a></li>
 		        
 				</ul>
 			</nav>
@@ -179,6 +175,8 @@
         <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
         <p>闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。</p>
 <h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>通俗点说，<strong>作用域为可访问变量，对象，函数的集合</strong>，或者说作用域作为一套规则，该规则<strong>用于确定在特定场景下如何查找变量</strong>。在ES6出现之前，JavaScript只有函数作用域和全局作用域。</p>
+<a id="more"></a>
+
 <h4 id="函数作用域和全局作用域"><a href="#函数作用域和全局作用域" class="headerlink" title="函数作用域和全局作用域"></a>函数作用域和全局作用域</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="string">'bar'</span></span><br><span class="line">  <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// bar</span></span><br></pre></td></tr></table></figure>
 
 <p>在执行函数 <code>foo</code> 时，变量<code>a</code>在函数<code>foo</code>的作用域内，因此可以正常访问，输出<code>bar</code>。</p>
@@ -199,6 +197,45 @@
 <p>但是如果使用<code>let</code>声明时：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(bar)</span><br><span class="line">	<span class="keyword">let</span> bar = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// Uncaught ReferenceError: bar is not defined。</span></span><br></pre></td></tr></table></figure>
 
+<p>这是因为在使用<code>let</code>或者<code>const</code>声明变量时，会生成一个针对该变量的封闭的块级作用域，在这个块级作用域中，如果在声明变量之前访问该变量，就会报错，如果在声明之后访问，就可以正常获取变量值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> bar = <span class="number">1</span></span><br><span class="line">	<span class="built_in">console</span>.log(bar)</span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>这个块级作用域中，存在一个“死区”，起始于函数开头，终止于相关变量声明的一行。在这个范围内无法访问<code>let</code>和<code>const</code>声明的变量，这个“死区”的专业名称为：TDZ(Temporal Dead Zone)，既“暂时性死区”。</p>
+<p><img src="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de" alt="img"></p>
+<p>再介绍一个比较极端的情况：函数的参数默认值设置也会受到TDZ的影响：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1 = arg2, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述函数中，如果第一个参数没有传，会默认用第二个参数作为第一个实参值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1 = arg2, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 1,2</span></span><br></pre></td></tr></table></figure>
+
+<p>但是，如果第一个参数缺省时，执行arg1 = arg2 会当作暂时性死区处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1 = arg2, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="literal">undefined</span>, <span class="number">2</span>) <span class="comment">// Uncaught ReferenceError: Cannot access 'arg2' before initialization</span></span><br></pre></td></tr></table></figure>
+
+<p>由此可见，除了块级作用域以外，函数参数默认值也会受到暂时性死区的影响。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1 = arg2, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="literal">null</span>, <span class="number">2</span>) <span class="comment">// null, 2</span></span><br></pre></td></tr></table></figure>
+
+<p>第一个参数改为null就不会报错，这就涉及到 <code>undefined</code> 和 <code>null</code> 的区别了。在执行 <code>foo(null, 2)</code> 时，不会认为“函数第一个参数缺省”，而会直接接受 <code>null</code> 作为第一个参数值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg1</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arg1</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">1</span>) <span class="comment">// Uncaught SyntaxError: Identifier 'arg1' has already been declared</span></span><br></pre></td></tr></table></figure>
+
+<p>这是因为在第一行，便已经声明了arg1这个变量，函数体内再用<code>let</code>声明，会报错。</p>
+<h3 id="执行上下文和调用栈"><a href="#执行上下文和调用栈" class="headerlink" title="执行上下文和调用栈"></a>执行上下文和调用栈</h3><p><strong>执行上下文</strong>就是指当前调用的代码的执行环境，其中主要包含了作用域链，this，变量对象。</p>
+<h4 id="代码执行的两个阶段"><a href="#代码执行的两个阶段" class="headerlink" title="代码执行的两个阶段"></a>代码执行的两个阶段</h4><ul>
+<li>代码预编译阶段</li>
+<li>代码执行阶段</li>
+</ul>
+<p>预编译阶段是指由编译器将JavaScript代码编译成可执行的代码，这里并非是指传统的编译（分词、解析、代码生成等过程），而是指在代码执行之前，JavaScript引擎会做一些准备工作。</p>
+<p>代码执行阶段的主要任务就是执行代码，执行上下文就在这个阶段创建完成。</p>
+<p>那么在预编译过程主要做了哪些准备工作呢？</p>
+<ul>
+<li><p>变量、函数表达式提升，默认赋值undefined</p>
+</li>
+<li><p>this赋值</p>
+</li>
+<li><p>函数声明赋值</p>
+<p>在执行阶段便会为之前提升的变量及函数表达式赋值，从而确定了变量对象、作用域链以及 <code>this</code> 的指向。</p>
+</li>
+</ul>
+<p>作用域是在预编译阶段确定，</p>
 
       
 
@@ -300,7 +337,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-number">1.</span> <span class="toc-text">作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数作用域和全局作用域"><span class="toc-number">1.1.</span> <span class="toc-text">函数作用域和全局作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#块级作用域和暂时性死区"><span class="toc-number">1.2.</span> <span class="toc-text">块级作用域和暂时性死区</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-number">1.</span> <span class="toc-text">作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数作用域和全局作用域"><span class="toc-number">1.1.</span> <span class="toc-text">函数作用域和全局作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#块级作用域和暂时性死区"><span class="toc-number">1.2.</span> <span class="toc-text">块级作用域和暂时性死区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#执行上下文和调用栈"><span class="toc-number">2.</span> <span class="toc-text">执行上下文和调用栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码执行的两个阶段"><span class="toc-number">2.1.</span> <span class="toc-text">代码执行的两个阶段</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
