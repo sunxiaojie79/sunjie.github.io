@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="孫小傑">
 <meta property="og:description" content="闭包是Javascript里面最基本也是最重要的知识点之一，说到闭包，又要涉及到作用域、作用域链、执行上下文(执行环境)、甚至内存管理等其他知识点。 作用域通俗点说，作用域为可访问变量，对象，函数的集合，或者说作用域作为一套规则，该规则用于确定在特定场景下如何查找变量。在ES6出现之前，JavaScript只有函数作用域和全局作用域。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gdbsan12oaj30yg0df46r.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gd8cpcn2unj30sw0cmjt6.jpg">
 <meta property="article:published_time" content="2020-03-24T10:10:03.507Z">
-<meta property="article:modified_time" content="2020-03-30T03:12:24.205Z">
+<meta property="article:modified_time" content="2020-03-30T03:18:06.388Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTgy1gdbsan12oaj30yg0df46r.jpg">
   
     <link rel="alternative" href="/atom.xml" title="孫小傑" type="application/atom+xml">
   
@@ -202,7 +202,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> bar = <span class="number">1</span></span><br><span class="line">	<span class="built_in">console</span>.log(bar)</span><br><span class="line">&#125;</span><br><span class="line">foo() <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 
 <p>这个块级作用域中，存在一个“死区”，起始于函数开头，终止于相关变量声明的一行。在这个范围内无法访问<code>let</code>和<code>const</code>声明的变量，这个“死区”的专业名称为：TDZ(Temporal Dead Zone)，既“暂时性死区”。</p>
-<p><img src="https://images.gitbook.cn/7de2a870-7058-11e9-aa97-037c54aa61de" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdbsan12oaj30yg0df46r.jpg" alt=""></p>
 <p>再介绍一个比较极端的情况：函数的参数默认值设置也会受到TDZ的影响：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1 = arg2, arg2</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(arg1, arg2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
