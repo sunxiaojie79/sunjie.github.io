@@ -148,6 +148,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ssh免密登录远程服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">ssh免密登录远程服务器</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2020-04-22T08:43:14.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+        <ol>
+<li><p>打开terminal</p>
+</li>
+<li><p>cd ~/.ssh</p>
+</li>
+<li><p><code>ssh-keygen</code>，生成一组公私钥对，分别为<code>id_rsa.pub</code> 和<code>id_rsa</code>，然后<code>cat id_rsa.pub</code>，复制整个文本，后面又用。</p>
+</li>
+<li><p><code>vi config</code><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge2o9m0g4nj30xe0e2atd.jpg" alt=""></p>
+</li>
+<li><p>登录远程服务器，<code>cd ~/.ssh</code>。</p>
+</li>
+<li><p>查看有没有<code>authorized_keys</code>这个文件，没有的话新建一个，用命令<code>touch authorized_keys</code>，然后<code>vi authorized_keys</code>，把刚刚复制的文本粘贴进去，保存。</p>
+</li>
+<li><p>这时，在本地的终端输入<code>ssh sunjiedeAliyun</code>就可以啦，<code>sunjiedeAliyun</code>是你在config里面设置的别名，自己随便取。</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-callback-&gt;promise-&gt;generator-&gt;async:await" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
