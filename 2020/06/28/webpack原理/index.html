@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ssh免密登录远程服务器 | 孫小傑</title>
+  <title>webpack原理 | 孫小傑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打开terminal  cd ~&#x2F;.ssh  ssh-keygen，生成一组公私钥对，分别为id_rsa.pub 和id_rsa，然后cat id_rsa.pub，复制整个文本，后面又用。  vi config  登录远程服务器，cd ~&#x2F;.ssh。  查看有没有authorized_keys这个文件，没有的话新建一个，用命令touch authorized_keys，然后vi authoriz">
+  <meta name="description" content="###webpack原理： 1.从配置文件和Shell语句中读取并合并参数,得出最终的参数2.用第一步得到的参数创建 Compiler3.调用 compiler.run 开始构建4.创建 Compilation5.基于配置开始创建 Chunk6.使用 Parser 从 Chunk 开始解析依赖7.使用 Module 和 Dependency 管理代码模块相互关系8.使用 Template 基于 C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ssh免密登录远程服务器">
-<meta property="og:url" content="http://yoursite.com/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:title" content="webpack原理">
+<meta property="og:url" content="http://yoursite.com/2020/06/28/webpack%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="孫小傑">
-<meta property="og:description" content="打开terminal  cd ~&#x2F;.ssh  ssh-keygen，生成一组公私钥对，分别为id_rsa.pub 和id_rsa，然后cat id_rsa.pub，复制整个文本，后面又用。  vi config  登录远程服务器，cd ~&#x2F;.ssh。  查看有没有authorized_keys这个文件，没有的话新建一个，用命令touch authorized_keys，然后vi authoriz">
+<meta property="og:description" content="###webpack原理： 1.从配置文件和Shell语句中读取并合并参数,得出最终的参数2.用第一步得到的参数创建 Compiler3.调用 compiler.run 开始构建4.创建 Compilation5.基于配置开始创建 Chunk6.使用 Parser 从 Chunk 开始解析依赖7.使用 Module 和 Dependency 管理代码模块相互关系8.使用 Template 基于 C">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge2o9m0g4nj30xe0e2atd.jpg">
-<meta property="article:published_time" content="2020-04-22T08:43:14.033Z">
-<meta property="article:modified_time" content="2020-04-25T15:02:05.272Z">
+<meta property="article:published_time" content="2020-06-28T08:03:11.618Z">
+<meta property="article:modified_time" content="2020-06-28T08:52:45.020Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge2o9m0g4nj30xe0e2atd.jpg">
   
     <link rel="alternative" href="/atom.xml" title="孫小傑" type="application/atom+xml">
   
@@ -152,20 +150,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ssh免密登录远程服务器" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-webpack原理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ssh免密登录远程服务器
+      webpack原理
     </h1>
   
 
         
-        <a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-04-22T08:43:14.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
+        <a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" class="archive-article-date">
+  	<time datetime="2020-06-28T08:03:11.618Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
 </a>
         
       </header>
@@ -173,22 +171,37 @@
     <div class="article-entry" itemprop="articleBody">
       
         <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
-        <ol>
-<li><p>打开terminal</p>
+        <p>###webpack原理：</p>
+<p>1.从配置文件和Shell语句中读取并合并参数,得出最终的参数<br>2.用第一步得到的参数创建 Compiler<br>3.调用 compiler.run 开始构建<br>4.创建 Compilation<br>5.基于配置开始创建 Chunk<br>6.使用 Parser 从 Chunk 开始解析依赖<br>7.使用 Module 和 Dependency 管理代码模块相互关系<br>8.使用 Template 基于 Compilation 的数据生成结果代码</p>
+<h3 id="loader"><a href="#loader" class="headerlink" title="loader:"></a>loader:</h3><p>Loader 本身仅仅只是一个函数，接收模块代码的内容，然后返回代码内容转化后的结果，并且一个文件还可以链式的经过多个loader转化(比如scss-loader =&gt; css-loader =&gt; style-loader)。<br>一个 Loader 的职责是单一的，只需要完成一种转化。 如果一个源文件需要经历多步转化才能正常使用，就通过多个 Loader 去转化。 在调用多个 Loader 去转化一个文件时，每个 Loader 会链式的顺序执行， 第一个 Loader 将会拿到需处理的原内容，上一个 Loader 处理后的结果会传给下一个接着处理，最后的 Loader 将处理后的最终结果返回给 Webpack。</p>
+<p>以下是一个最简单的loader例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">source</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// source 为 compiler 传递给 Loader 的一个文件的原内容</span></span><br><span class="line">  <span class="comment">// 该函数需要返回处理后的内容，这里简单起见，直接把原内容返回了，相当于该 Loader 没有做任何转换</span></span><br><span class="line">  <span class="keyword">return</span> source;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>###plugin:</p>
+<p>plugin 的实现可以是一个类，使用时传入相关配置来创建一个实例，然后放到配置的 <code>plugins</code> 字段中，而 plugin 实例中最重要的方法是 <code>apply</code>，该方法在 webpack compiler 安装插件时会被调用一次，<code>apply</code> 接收 webpack compiler 对象实例的引用，你可以在 compiler 对象实例上注册各种事件钩子函数，来影响 webpack 的所有构建流程，以便完成更多其他的构建任务。</p>
+<p>一下 是一个最简单的plugin例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasicPlugin</span></span>&#123;</span><br><span class="line">  <span class="comment">// 在构造函数中获取用户给该插件传入的配置</span></span><br><span class="line">  <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Webpack 会调用 BasicPlugin 实例的 apply 方法给插件实例传入 compiler 对象</span></span><br><span class="line">  apply(compiler)&#123;</span><br><span class="line">    compiler.plugin(<span class="string">'compilation'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">compilation</span>) </span>&#123;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出 Plugin</span></span><br><span class="line"><span class="built_in">module</span>.exports = BasicPlugin;</span><br></pre></td></tr></table></figure>
+
+<p>Webpack 启动后，在读取配置的过程中会先执行 new BasicPlugin(options) 初始化一个 BasicPlugin 获得其实例。 在初始化 compiler 对象后，再调用 basicPlugin.apply(compiler) 给插件实例传入 compiler 对象。 插件实例在获取到 compiler 对象后，就可以通过 compiler.plugin(事件名称, 回调函数) 监听到 Webpack 广播出来的事件。 并且可以通过 compiler 对象去操作 Webpack。</p>
+<p>在开发 Plugin 最主要的就是理解 compiler 和 compilation，它们是 Plugin 和 Webpack 之间的桥梁。这两者提供的各种 hooks 和 api，则是开发 plugin 所必不可少的材料，通过 compiler 和 compilation 的生命周期 hooks，也可以更好地深入了解 webpack 的整个构建工作是如何进行的。</p>
+<h3 id="模块化标准："><a href="#模块化标准：" class="headerlink" title="模块化标准："></a>模块化标准：</h3><p>AMD,CMD,CommonJS,ES Module</p>
+<p>CommonJS:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    a: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = <span class="built_in">require</span>(<span class="string">'./a.js'</span>)</span><br><span class="line"><span class="built_in">module</span>.a <span class="comment">// -&gt; log 1</span></span><br></pre></td></tr></table></figure>
+
+<p>ES Module</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入模块 API</span></span><br><span class="line"><span class="keyword">import</span> XXX <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="keyword">import</span> &#123; XXX &#125; <span class="keyword">from</span> <span class="string">'./a.js'</span></span><br><span class="line"><span class="comment">// 导出模块 API</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ES Module 与 CommonJS 有以下几个区别</p>
+<ul>
+<li><p>CommonJS 在导出时都是值拷贝，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是 ES Module 采用实时绑定的方式，导入导出的值都指向同一个内存地址，所以导入值会跟随导出值变化</p>
 </li>
-<li><p>cd ~/.ssh</p>
+<li><p>ES Module 会编译成 <code>require/exports</code> 来执行的</p>
 </li>
-<li><p><code>ssh-keygen</code>，生成一组公私钥对，分别为<code>id_rsa.pub</code> 和<code>id_rsa</code>，然后<code>cat id_rsa.pub</code>，复制整个文本，后面又用。</p>
+<li><p>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</p>
 </li>
-<li><p><code>vi config</code><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge2o9m0g4nj30xe0e2atd.jpg" alt=""></p>
+<li><p>CommonJS 加载的是整个模块，即将所有的接口全部加载进来，ES6 可以单独加载其中的某个方法</p>
 </li>
-<li><p>登录远程服务器，<code>cd ~/.ssh</code>。</p>
-</li>
-<li><p>查看有没有<code>authorized_keys</code>这个文件，没有的话新建一个，用命令<code>touch authorized_keys</code>，然后<code>vi authorized_keys</code>，<a id="more"></a>把刚刚复制的文本粘贴进去，保存。</p>
-</li>
-<li><p>这时，在本地的终端输入<code>ssh sunjiedeAliyun</code>就可以啦，<code>sunjiedeAliyun</code>是你在config里面设置的别名，自己随便取。</p>
-</li>
-</ol>
+</ul>
 
       
 
@@ -247,7 +260,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/28/webpack%E5%8E%9F%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -261,18 +274,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          webpack原理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">callback-&gt;promise-&gt;generator-&gt;async:await</div>
+    <a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ssh免密登录远程服务器</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -299,7 +303,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#loader"><span class="toc-number">1.</span> <span class="toc-text">loader:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块化标准："><span class="toc-number">2.</span> <span class="toc-text">模块化标准：</span></a></li></ol>
                     </div>
                 </span>
             </div>
