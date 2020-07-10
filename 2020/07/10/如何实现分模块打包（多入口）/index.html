@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | 孫小傑</title>
+  <title>如何实现分模块打包（多入口） | 孫小傑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="孫小傑">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="webpack多入口打包：基本思路就是每个⻚⾯对应⼀个 entry，⼀个 html-webpack-plugin，但是这样的缺点就是每次新增或删除⻚⾯需要改 webpack 配置，如下所示： 12345678910111213141516171819202122232425262728293031323334353637383940module.exports &#x3D; &amp;#123;  entry: &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现分模块打包（多入口）">
+<meta property="og:url" content="http://yoursite.com/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/index.html">
 <meta property="og:site_name" content="孫小傑">
+<meta property="og:description" content="webpack多入口打包：基本思路就是每个⻚⾯对应⼀个 entry，⼀个 html-webpack-plugin，但是这样的缺点就是每次新增或删除⻚⾯需要改 webpack 配置，如下所示： 12345678910111213141516171819202122232425262728293031323334353637383940module.exports &#x3D; &amp;#123;  entry: &amp;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-10T03:07:18.272Z">
+<meta property="article:modified_time" content="2020-07-10T06:53:04.536Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
   
@@ -146,238 +150,165 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-如何实现分模块打包（多入口）" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      如何实现分模块打包（多入口）
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" class="archive-article-date">
+
+        
+        <a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" class="archive-article-date">
   	<time datetime="2020-07-10T03:07:18.272Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/">如何实现分模块打包（多入口）</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+        <h3 id="webpack多入口打包："><a href="#webpack多入口打包：" class="headerlink" title="webpack多入口打包："></a>webpack多入口打包：</h3><p>基本思路就是每个⻚⾯对应⼀个 entry，⼀个 html-webpack-plugin，但是这样的缺点就是每次新增或删除⻚⾯需要改 webpack 配置，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    index: <span class="string">'./src/index.js'</span>,</span><br><span class="line">    search: <span class="string">'./src/search.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path:path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'[name]-bundle.js'</span></span><br><span class="line">  &#125;，</span><br><span class="line">  plugins: [</span><br><span class="line">  	<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.join(__dirname, <span class="string">'src/index.html'</span>),</span><br><span class="line">      filename: <span class="string">'index.html'</span>,</span><br><span class="line">      chunks: [<span class="string">'index'</span>],</span><br><span class="line">      inject: <span class="literal">true</span>,</span><br><span class="line">      minify: &#123;</span><br><span class="line">      	html5: <span class="literal">true</span>,</span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">        preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">        minifyCSS: <span class="literal">true</span>,</span><br><span class="line">        minifyJS: <span class="literal">true</span>,</span><br><span class="line">        removeComments: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.join(__dirname, <span class="string">'src/search.html'</span>),</span><br><span class="line">      filename: <span class="string">'search.html'</span>,</span><br><span class="line">      chunks: [<span class="string">'search'</span>],</span><br><span class="line">      inject: <span class="literal">true</span>,</span><br><span class="line">      minify: &#123;</span><br><span class="line">        html5: <span class="literal">true</span>,</span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">        preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">        minifyCSS: <span class="literal">true</span>,</span><br><span class="line">        minifyJS: <span class="literal">true</span>,</span><br><span class="line">        removeComments: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)  </span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>所以便有了以下的通用方案：</p>
+<p>利⽤ glob.sync 动态获取 entry 和设置 html-webpack-plugin 数量（不过要求src里面的入口必须按照’./src/*/index.js’来配置，比如’./src/index/index.js’ 或者 ‘./src/serach/index.js’，并且在该目录下放入相应的html模板，比如’./src/index/index.html’ 或者 ‘./src/serach/index.html’），如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> setMPA = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> entrys = &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> htmlWebpackPlugins = [];</span><br><span class="line">  <span class="comment">// 按照上面说的格式来动态获取入口文件</span></span><br><span class="line">  <span class="keyword">const</span> entryFiles = glob.sync(path.join(__dirname, <span class="string">'./src/*/index.js'</span>))</span><br><span class="line">  <span class="built_in">Object</span>.keys(entriyFiles).map(<span class="function"><span class="params">index</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> entryFile = entryFiles[index];</span><br><span class="line">    <span class="keyword">const</span> match = entryFiles.match(<span class="regexp">/src\/(.*)\/index.js/</span>);</span><br><span class="line">    <span class="keyword">const</span> pageName = match &amp;&amp; match[<span class="number">1</span>];</span><br><span class="line">    entry[pageName] = entryFile;</span><br><span class="line">    htmlWebpackPlugins.push(&#123;</span><br><span class="line">      <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">        template: path.join(__dirname, <span class="string">`src/<span class="subst">$&#123;pageName&#125;</span>/index.html`</span>),</span><br><span class="line">        filename: <span class="string">`<span class="subst">$&#123;pageName&#125;</span>.html`</span>,</span><br><span class="line">        chunks: [$&#123;pageName&#125;],</span><br><span class="line">        inject: <span class="literal">true</span>,</span><br><span class="line">        minify: &#123;</span><br><span class="line">          html5: <span class="literal">true</span>,</span><br><span class="line">          collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">          preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">          minifyCSS: <span class="literal">true</span>,</span><br><span class="line">          minifyJS: <span class="literal">true</span>,</span><br><span class="line">          removeComments: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;) </span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    entry, htmlWebpackPlugins</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; entry, htmlWebpackPlugins &#125; = setMPA();</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry: entry,</span><br><span class="line">  ...</span><br><span class="line">  plugins: [</span><br><span class="line">    ...</span><br><span class="line">  ].concat(htmlWebpackPlugins),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+
+
+
+
+<h3 id="import-Button-from-‘antd’，打包的时候只打包-button，分模块加载，是怎么做到的"><a href="#import-Button-from-‘antd’，打包的时候只打包-button，分模块加载，是怎么做到的" class="headerlink" title="import { Button } from ‘antd’，打包的时候只打包 button，分模块加载，是怎么做到的?"></a>import { Button } from ‘antd’，打包的时候只打包 button，分模块加载，是怎么做到的?</h3><p>1.安装babel-plugin-import,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-plugin-<span class="keyword">import</span> -D</span><br></pre></td></tr></table></figure>
+
+<p>2.通过 <code>.babelrc</code> 配置文件或者 babel-loader 模块编程引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  [<span class="string">'import'</span>, &#123; <span class="attr">libraryName</span>: <span class="string">'antd'</span>, <span class="attr">style</span>: <span class="literal">true</span> &#125;] <span class="comment">// import scss</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-06-28T08:03:11.618Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">webpack原理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/">webpack原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack多入口打包："><span class="toc-number">1.</span> <span class="toc-text">webpack多入口打包：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import-Button-from-‘antd’，打包的时候只打包-button，分模块加载，是怎么做到的"><span class="toc-number">2.</span> <span class="toc-text">import { Button } from ‘antd’，打包的时候只打包 button，分模块加载，是怎么做到的?</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-04-22T08:43:14.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">ssh免密登录远程服务器</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/" class="archive-article-date">
-  	<time datetime="2020-04-07T09:38:00.626Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/">callback-&gt;promise-&gt;generator-&gt;async:await</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-03-31T02:25:47.345Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/">JavaScript里的类型</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/24/%E9%97%AD%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2020-03-24T10:10:03.507Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/24/%E9%97%AD%E5%8C%85/">闭包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/20/this%E5%88%B0%E5%BA%95%E6%98%AF%E4%B8%AA%E5%95%A5/" class="archive-article-date">
-  	<time datetime="2020-03-20T02:49:42.565Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/20/this%E5%88%B0%E5%BA%95%E6%98%AF%E4%B8%AA%E5%95%A5/">this到底是个啥</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/07/hello-world/" class="archive-article-date">
-  	<time datetime="2020-03-06T18:37:49.286Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -400,8 +331,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -148,6 +148,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-如何实现分模块打包（多入口）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/">如何实现分模块打包（多入口）</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2020-07-10T03:07:18.272Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+        <h3 id="webpack多入口打包："><a href="#webpack多入口打包：" class="headerlink" title="webpack多入口打包："></a>webpack多入口打包：</h3><p>基本思路就是每个⻚⾯对应⼀个 entry，⼀个 html-webpack-plugin，但是这样的缺点就是每次新增或删除⻚⾯需要改 webpack 配置，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    index: <span class="string">'./src/index.js'</span>,</span><br><span class="line">    search: <span class="string">'./src/search.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path:path.resolve(__dirname, <span class="string">'dist'</span>),</span><br><span class="line">    filename: <span class="string">'[name]-bundle.js'</span></span><br><span class="line">  &#125;，</span><br><span class="line">  plugins: [</span><br><span class="line">  	<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.join(__dirname, <span class="string">'src/index.html'</span>),</span><br><span class="line">      filename: <span class="string">'index.html'</span>,</span><br><span class="line">      chunks: [<span class="string">'index'</span>],</span><br><span class="line">      inject: <span class="literal">true</span>,</span><br><span class="line">      minify: &#123;</span><br><span class="line">      	html5: <span class="literal">true</span>,</span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">        preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">        minifyCSS: <span class="literal">true</span>,</span><br><span class="line">        minifyJS: <span class="literal">true</span>,</span><br><span class="line">        removeComments: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.join(__dirname, <span class="string">'src/search.html'</span>),</span><br><span class="line">      filename: <span class="string">'search.html'</span>,</span><br><span class="line">      chunks: [<span class="string">'search'</span>],</span><br><span class="line">      inject: <span class="literal">true</span>,</span><br><span class="line">      minify: &#123;</span><br><span class="line">        html5: <span class="literal">true</span>,</span><br><span class="line">        collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">        preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">        minifyCSS: <span class="literal">true</span>,</span><br><span class="line">        minifyJS: <span class="literal">true</span>,</span><br><span class="line">        removeComments: <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)  </span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以便有了以下的通用方案：</p>
+<p>利⽤ glob.sync 动态获取 entry 和设置 html-webpack-plugin 数量（不过要求src里面的入口必须按照’./src/*/index.js’来配置，比如’./src/index/index.js’ 或者 ‘./src/serach/index.js’，并且在该目录下放入相应的html模板，比如’./src/index/index.html’ 或者 ‘./src/serach/index.html’），如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> setMPA = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> entrys = &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> htmlWebpackPlugins = [];</span><br><span class="line">  <span class="comment">// 按照上面说的格式来动态获取入口文件</span></span><br><span class="line">  <span class="keyword">const</span> entryFiles = glob.sync(path.join(__dirname, <span class="string">'./src/*/index.js'</span>))</span><br><span class="line">  <span class="built_in">Object</span>.keys(entriyFiles).map(<span class="function"><span class="params">index</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> entryFile = entryFiles[index];</span><br><span class="line">    <span class="keyword">const</span> match = entryFiles.match(<span class="regexp">/src\/(.*)\/index.js/</span>);</span><br><span class="line">    <span class="keyword">const</span> pageName = match &amp;&amp; match[<span class="number">1</span>];</span><br><span class="line">    entry[pageName] = entryFile;</span><br><span class="line">    htmlWebpackPlugins.push(&#123;</span><br><span class="line">      <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">        template: path.join(__dirname, <span class="string">`src/<span class="subst">$&#123;pageName&#125;</span>/index.html`</span>),</span><br><span class="line">        filename: <span class="string">`<span class="subst">$&#123;pageName&#125;</span>.html`</span>,</span><br><span class="line">        chunks: [$&#123;pageName&#125;],</span><br><span class="line">        inject: <span class="literal">true</span>,</span><br><span class="line">        minify: &#123;</span><br><span class="line">          html5: <span class="literal">true</span>,</span><br><span class="line">          collapseWhitespace: <span class="literal">true</span>,</span><br><span class="line">          preserveLineBreaks: <span class="literal">false</span>,</span><br><span class="line">          minifyCSS: <span class="literal">true</span>,</span><br><span class="line">          minifyJS: <span class="literal">true</span>,</span><br><span class="line">          removeComments: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;) </span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    entry, htmlWebpackPlugins</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; entry, htmlWebpackPlugins &#125; = setMPA();</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	entry: entry,</span><br><span class="line">  ...</span><br><span class="line">  plugins: [</span><br><span class="line">    ...</span><br><span class="line">  ].concat(htmlWebpackPlugins),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="import-Button-from-‘antd’，打包的时候只打包-button，分模块加载，是怎么做到的"><a href="#import-Button-from-‘antd’，打包的时候只打包-button，分模块加载，是怎么做到的" class="headerlink" title="import { Button } from ‘antd’，打包的时候只打包 button，分模块加载，是怎么做到的?"></a>import { Button } from ‘antd’，打包的时候只打包 button，分模块加载，是怎么做到的?</h3><p>1.安装babel-plugin-import,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i babel-plugin-<span class="keyword">import</span> -D</span><br></pre></td></tr></table></figure>
+
+<p>2.通过 <code>.babelrc</code> 配置文件或者 babel-loader 模块编程引入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  [<span class="string">'import'</span>, &#123; <span class="attr">libraryName</span>: <span class="string">'antd'</span>, <span class="attr">style</span>: <span class="literal">true</span> &#125;] <span class="comment">// import scss</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-webpack原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
