@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | 孫小傑</title>
+  <title>http2 | 孫小傑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="孫小傑">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="Http2特性，Http2 怎么确保文件同时传输不会报错?1.二进制传输： 在之前的http中，是通过文本传输的，在http2中所有的传输数据都会被分割，并采用二进制格式编码。 2.多路复用： 在说多路复用之前，先说一下在http2中有两个概念，分别是stream(流)和frame(帧)，frame是最小的单位，每个frame会有 Stream Identifier 来标示它是属于哪个stream">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http2">
+<meta property="og:url" content="http://yoursite.com/2020/07/16/http2/index.html">
 <meta property="og:site_name" content="孫小傑">
+<meta property="og:description" content="Http2特性，Http2 怎么确保文件同时传输不会报错?1.二进制传输： 在之前的http中，是通过文本传输的，在http2中所有的传输数据都会被分割，并采用二进制格式编码。 2.多路复用： 在说多路复用之前，先说一下在http2中有两个概念，分别是stream(流)和frame(帧)，frame是最小的单位，每个frame会有 Stream Identifier 来标示它是属于哪个stream">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-16T06:07:03.550Z">
+<meta property="article:modified_time" content="2020-07-16T07:57:01.472Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
   
@@ -146,265 +150,163 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-http2" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      http2
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/16/http2/" class="archive-article-date">
+
+        
+        <a href="/2020/07/16/http2/" class="archive-article-date">
   	<time datetime="2020-07-16T06:07:03.550Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/16/http2/">http2</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+        <h3 id="Http2特性，Http2-怎么确保文件同时传输不会报错"><a href="#Http2特性，Http2-怎么确保文件同时传输不会报错" class="headerlink" title="Http2特性，Http2 怎么确保文件同时传输不会报错?"></a>Http2特性，Http2 怎么确保文件同时传输不会报错?</h3><p>1.二进制传输：</p>
+<p>在之前的<code>http</code>中，是通过文本传输的，在<code>http2</code>中所有的传输数据都会被分割，并采用二进制格式编码。</p>
+<p>2.多路复用：</p>
+<p>在说多路复用之前，先说一下在http2中有两个概念，分别是<code>stream(流)</code>和<code>frame(帧)</code>，<code>frame</code>是最小的单位，每个<code>frame</code>会有 <code>Stream Identifier</code> 来标示它是属于哪个<code>stream</code>的。</p>
+<p>在<code>http1.x</code>情况下，每个<code>http</code>请求都会建立一个<code>tcp</code>连接，也就意味着每个请求都要进行三次握手，这会造成时间和资源的浪费，而且浏览器会限制同一域名下并发请求的个数，当请求很多资源时，队头阻塞会导致在达到最大请求数量时，剩余的资源要等待其他资源请求完成才能发起请求(这里可以引申一下针对此种情况的优化手段，就是把不同资源放在不同域名下，以此来突破浏览器最大并发数的限制)。</p>
+<p>在<code>http2</code>的情况下，所有的请求都会共用一个<code>tcp</code>连接，就可以传输所有的请求数据。这就解决了浏览器同一域名请求数量的问题，也解决了每开一个<code>tcp</code>连接都会造成的资源时间浪费。</p>
+<p>但是同一个<code>tcp</code>连接下多个<code>http</code>请求，如何保证传输不出错呢？这就要用到开始提到的两个概念了，多路复用，就是在一个<code>tcp</code>连接中可以存在多个<code>stream</code>，也就是多个请求，每个<code>stream</code>又包含了多个<code>frame</code>，通过<code>Stream Identifier</code> 就可以识别出每个<code>frame</code>分别对应的<code>stream</code>，当<code>frame</code>到达服务端之后，就可以根据<code>Stream Identifier</code> 来重新组合得到完整的请求了，这就在提高传输性能的同时保证了传输的正确性。</p>
+<p>3.<code>Header</code>压缩</p>
+<p><code>http1.x</code>中，使用文本的形式传输<code>header</code>每次请求都会带上，这些基本上都是不变的，如果再加上<code>cookie</code>的话也是不小的浪费。</p>
+<p><code>http2</code>中，使用了<code>HPACK</code>压缩格式对<code>header</code>进行了编码，减少了<code>header</code>的大小，大概原理就是在服务端和客户端共同维护一个静态字典，用于记录出现过的<code>header</code>，后面在传输过程中发送端直接传输已经记录过的键名，接收端就可以通过键名找到对应的值。</p>
+<p>4.服务端<code>push</code></p>
+<p>在<code>http2</code>中，服务端可以在客户端的某个请求后，根据这个请求，主动推送其他的资源。</p>
+<p>比如一个<code>html</code>页面中还带上可一个<code>css</code>和<code>js</code>的资源请求，<code>http1.x</code>时，要发送三次请求，在<code>http2</code>中，不用请求三次，服务器发现<code>html</code>中包含了<code>css</code>和<code>js</code>资源，便会将三个资源都返回给客户端，这样只需要一次通信，就可以获得全部资源。</p>
+<h3 id="HTTP2-0的多路复⽤和HTTP1-X中的⻓连接复⽤有什么区别？HTTP2-0多路复⽤有多好？"><a href="#HTTP2-0的多路复⽤和HTTP1-X中的⻓连接复⽤有什么区别？HTTP2-0多路复⽤有多好？" class="headerlink" title="HTTP2.0的多路复⽤和HTTP1.X中的⻓连接复⽤有什么区别？HTTP2.0多路复⽤有多好？"></a>HTTP2.0的多路复⽤和HTTP1.X中的⻓连接复⽤有什么区别？HTTP2.0多路复⽤有多好？</h3><p><code>HTTP/1.X</code> 默认开启持久连接，在一个<code>TCP</code>连接上可以传送多个<code>HTTP</code>请求和响应，减少了建立和关闭连接的消耗和延迟。</p>
+<p><code>HTTP/2.0</code>支持多路复用，这是<code>HTTP/1.X</code>持久连接的升级版。多路复用，就是在一个 <code>TCP</code> 连接中可以存在多条流，也就是可以发送多个请求，服务端则可以通过帧中的标识知道该帧属于哪个流（即请求），通过重新排序还原请求。多路复用允许并发的发起多个请求，每个请求及该请求的响应不需要等待其他的请求或响应，避免了线头阻塞问题。这样某个请求任务耗时严重，不会影响到其它连接的正常执行,极大的提高传输性能。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/16/http2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-07-10T03:07:18.272Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何实现分模块打包（多入口）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/">如何实现分模块打包（多入口）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Http2特性，Http2-怎么确保文件同时传输不会报错"><span class="toc-number">1.</span> <span class="toc-text">Http2特性，Http2 怎么确保文件同时传输不会报错?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP2-0的多路复⽤和HTTP1-X中的⻓连接复⽤有什么区别？HTTP2-0多路复⽤有多好？"><span class="toc-number">2.</span> <span class="toc-text">HTTP2.0的多路复⽤和HTTP1.X中的⻓连接复⽤有什么区别？HTTP2.0多路复⽤有多好？</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-06-28T08:03:11.618Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/">webpack原理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-04-22T08:43:14.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">ssh免密登录远程服务器</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/" class="archive-article-date">
-  	<time datetime="2020-04-07T09:38:00.626Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/">callback-&gt;promise-&gt;generator-&gt;async:await</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-03-31T02:25:47.345Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/">JavaScript里的类型</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/24/%E9%97%AD%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2020-03-24T10:10:03.507Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/24/%E9%97%AD%E5%8C%85/">闭包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/20/this%E5%88%B0%E5%BA%95%E6%98%AF%E4%B8%AA%E5%95%A5/" class="archive-article-date">
-  	<time datetime="2020-03-20T02:49:42.565Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/20/this%E5%88%B0%E5%BA%95%E6%98%AF%E4%B8%AA%E5%95%A5/">this到底是个啥</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/07/hello-world/" class="archive-article-date">
-  	<time datetime="2020-03-06T18:37:49.286Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -427,8 +329,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
