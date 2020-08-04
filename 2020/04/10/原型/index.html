@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | 孫小傑</title>
+  <title>原型 | 孫小傑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="孫小傑">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="自己实现new在Javascript中，使用new关键字创建一个对象时，好像是基于类的继承，然而真实的情况却是基于原型继承的。来看看new关键字到底做了什么：  1.创建一个对象 2.使这个对象的__proto__指向构造函数的prototype 3.执行构造函数，将创建的空对象赋值给构造函数内部的this 4.根据构造函数的逻辑，返回第一步创建的对象或者构造函数内部显示返回值  下面模拟实现ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型">
+<meta property="og:url" content="http://yoursite.com/2020/04/10/%E5%8E%9F%E5%9E%8B/index.html">
 <meta property="og:site_name" content="孫小傑">
+<meta property="og:description" content="自己实现new在Javascript中，使用new关键字创建一个对象时，好像是基于类的继承，然而真实的情况却是基于原型继承的。来看看new关键字到底做了什么：  1.创建一个对象 2.使这个对象的__proto__指向构造函数的prototype 3.执行构造函数，将创建的空对象赋值给构造函数内部的this 4.根据构造函数的逻辑，返回第一步创建的对象或者构造函数内部显示返回值  下面模拟实现ne">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-10T01:54:57.103Z">
+<meta property="article:modified_time" content="2020-08-04T09:13:38.985Z">
 <meta property="article:author" content="Sun Jie">
 <meta name="twitter:card" content="summary">
   
@@ -146,295 +150,181 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-原型" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/27/%20Vue%20%E7%9A%84$nextTick%20%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-07-27T03:49:20.841Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/27/%20Vue%20%E7%9A%84$nextTick%20%E5%8E%9F%E7%90%86/"> Vue 的$nextTick 原理</a>
+    <h1 class="article-title" itemprop="name">
+      原型
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/27/Vue%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2020-07-27T02:34:57.610Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/27/Vue%E4%BE%9D%E8%B5%96%E6%94%B6%E9%9B%86/">Vue依赖收集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/16/http2/" class="archive-article-date">
-  	<time datetime="2020-07-16T06:07:03.550Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/16/http2/">http2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2020-07-10T03:07:18.272Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%EF%BC%88%E5%A4%9A%E5%85%A5%E5%8F%A3%EF%BC%89/">如何实现分模块打包（多入口）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2020-06-28T08:03:11.618Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/28/webpack%E5%8E%9F%E7%90%86/">webpack原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-04-22T08:43:14.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/">ssh免密登录远程服务器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/10/%E5%8E%9F%E5%9E%8B/" class="archive-article-date">
+        
+        <a href="/2020/04/10/%E5%8E%9F%E5%9E%8B/" class="archive-article-date">
   	<time datetime="2020-04-10T01:54:57.103Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/10/%E5%8E%9F%E5%9E%8B/">原型</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div id="busuanzi_container_page_pv" style="font-size:16px;color:rgb(153, 153, 153);line-height:1.8em;">本文阅读量<span id="busuanzi_value_page_pv"></span>次</div>
+        <h3 id="自己实现new"><a href="#自己实现new" class="headerlink" title="自己实现new"></a>自己实现new</h3><p>在Javascript中，使用new关键字创建一个对象时，好像是基于类的继承，然而真实的情况却是基于原型继承的。来看看new关键字到底做了什么：</p>
+<ul>
+<li>1.创建一个对象</li>
+<li>2.使这个对象的<code>__proto__</code>指向构造函数的<code>prototype</code></li>
+<li>3.执行构造函数，将创建的空对象赋值给构造函数内部的<code>this</code></li>
+<li>4.根据构造函数的逻辑，返回第一步创建的对象或者构造函数内部显示返回值</li>
+</ul>
+<p>下面模拟实现<code>new</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 生成一个新对象</span></span><br><span class="line">  <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">	<span class="comment">// 获取构造函数</span></span><br><span class="line">  <span class="keyword">let</span> Con = [].shift.call(<span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// 链接到原型,也可以用obj = Object.create(Con.prototype)来实现</span></span><br><span class="line">  obj.__proto__ = Con.prototype</span><br><span class="line">  <span class="comment">// 绑定this并求出构造函数的返回值</span></span><br><span class="line">  <span class="keyword">const</span> res = Con.call(obj, <span class="built_in">arguments</span>)</span><br><span class="line">  <span class="comment">// 构造函数如果有显示返回值，且返回值为对象，则返回该对象，否则返回目标实例</span></span><br><span class="line">  <span class="keyword">return</span> res <span class="keyword">instanceof</span> <span class="built_in">Object</span> ? res : obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
 
+
+<h3 id="如何实现继承"><a href="#如何实现继承" class="headerlink" title="如何实现继承"></a>如何实现继承</h3><p>Javascript的继承和其他大多数语言不一样，它是基于原型的。在ES5及以前，都是直接用原型的写法来继承的，ES6开始可以用Class写法。</p>
+<h4 id="ES5的继承"><a href="#ES5的继承" class="headerlink" title="ES5的继承"></a>ES5的继承</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个父类函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Parent</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 要声明一个子类函数Child () &#123;&#125;继承Parent</span></span><br><span class="line"><span class="comment">// 实例化一个Child类型的对象child，于是有child.__proto__ === Child.prototype，</span></span><br><span class="line"><span class="comment">// 为了能够在原型链上往上找，就要有 Child.prototype.__proto__ === Parent.prototype,</span></span><br><span class="line"><span class="comment">// 所以实现原型继承最关键的要点就是：Child.prototype = new Parent()</span></span><br><span class="line"><span class="comment">// 这样的实现，便可以让不同的Child的实例的__proto__一直可以往上找到同一个Parent</span></span><br><span class="line"><span class="keyword">var</span> child = <span class="keyword">new</span> Child() </span><br><span class="line"><span class="comment">// 下面便是比较完美的实现继承的代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Child</span>(<span class="params">args</span>)</span>&#123;</span><br><span class="line">  Parent.call(<span class="keyword">this</span>, args)</span><br><span class="line">&#125;</span><br><span class="line">Child.prototype = <span class="built_in">Object</span>.create(Parent.prototype);</span><br><span class="line">Child.constructor = Child;</span><br><span class="line">Child.super = Parent;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(Child, Parent);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="ES6的继承"><a href="#ES6的继承" class="headerlink" title="ES6的继承"></a>ES6的继承</h4><p>ES6用 class extends 进行继承，就比较简单了，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.type = <span class="string">'person'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">super</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child1 = <span class="keyword">new</span> Child()</span><br><span class="line">child1.type <span class="comment">// "person"</span></span><br><span class="line"></span><br><span class="line">child1 <span class="keyword">instanceof</span> Child <span class="comment">// true</span></span><br><span class="line">child1 <span class="keyword">instanceof</span> Parent <span class="comment">// true</span></span><br><span class="line">child1.hasOwnProperty(<span class="string">'type'</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>但是其本质还是ES5的原型继承的语法糖，主要逻辑还是</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原型链上方法的继承</span></span><br><span class="line">Child.prototype = <span class="built_in">Object</span>.create(Parent.prototype);</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(Child, Parent)</span><br><span class="line"><span class="comment">// 构造函数中属性的继承</span></span><br><span class="line">Parent.call(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/10/%E5%8E%9F%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/" class="archive-article-date">
-  	<time datetime="2020-04-07T09:38:00.626Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/04/22/ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%BF%9C%E7%A8%8B%E6%9C%8D%E5%8A%A1%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ssh免密登录远程服务器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">callback-&gt;promise-&gt;generator-&gt;async:await</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/07/callback-%3Epromise-%3Egenerator-%3Easync:await/">callback-&gt;promise-&gt;generator-&gt;async:await</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#自己实现new"><span class="toc-number">1.</span> <span class="toc-text">自己实现new</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现继承"><span class="toc-number">2.</span> <span class="toc-text">如何实现继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ES5的继承"><span class="toc-number">2.1.</span> <span class="toc-text">ES5的继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES6的继承"><span class="toc-number">2.2.</span> <span class="toc-text">ES6的继承</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2020-03-31T02:25:47.345Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/JavaScript%E9%87%8C%E7%9A%84%E7%B1%BB%E5%9E%8B/">JavaScript里的类型</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/24/%E9%97%AD%E5%8C%85/" class="archive-article-date">
-  	<time datetime="2020-03-24T10:10:03.507Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/24/%E9%97%AD%E5%8C%85/">闭包</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -458,8 +348,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
